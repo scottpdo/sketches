@@ -2,10 +2,10 @@ import { Environment, Terrain, Colors, utils } from "flocc";
 import canvasSketch from "canvas-sketch";
 import SimplexNoise from "simplex-noise";
 
-const [width, height] = [800, 1200];
+const [width, height] = [2000, 200];
 const settings = {
   // animate: true,
-  dimensions: [width, height]
+  dimensions: [width, height],
 };
 
 const simplex = new SimplexNoise("123");
@@ -14,7 +14,7 @@ const simplex = new SimplexNoise("123");
 
 const MOVE_THRESHOLD = (x, y) =>
   utils.remap(
-    simplex.noise2D(x / (width / 2), y / (height / 2)),
+    simplex.noise2D(x / (width / 6), y / (width / 6)),
     -1,
     1,
     0,
@@ -66,7 +66,7 @@ terrain.addRule((x, y) => {
 
     const neighbors = terrain.neighbors(x, y, 1, true).filter(existsPixel);
     const percentLike =
-      neighbors.filter(n => areSame(color, n)).length / neighbors.length;
+      neighbors.filter((n) => areSame(color, n)).length / neighbors.length;
 
     if (neighbors.length === 0) return;
     if (percentLike >= MOVE_THRESHOLD(x, y)) return;
@@ -76,7 +76,7 @@ terrain.addRule((x, y) => {
   } else {
     const sum = { r: 0, g: 0, b: 0, a: 0 };
     const neighbors = terrain.neighbors(x, y, 1, true);
-    neighbors.forEach(neighbor => {
+    neighbors.forEach((neighbor) => {
       sum.r += neighbor.r;
       sum.g += neighbor.g;
       sum.b += neighbor.b;

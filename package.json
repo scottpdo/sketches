@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas-sketch": "^0.7.0",
-    "flocc": "^0.4.0",
+    "flocc": "^0.4.5",
     "simplex-noise": "^2.4.0"
   }
 }
